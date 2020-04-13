@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New</title>
+    <link rel="stylesheet" href="../../../public/styles/reset.css" type="text/css">
+    <link rel="stylesheet" href="../../../public/styles/base.css" type="text/css">
 </head>
 <body>
     <header>
-
+      <h1>Choose Best Books</h1>
     </header>
     <main>
-        <form action="">
-            <input type="text">
-            <label for="">Title</label>
-            <input type="radio">            
-            <label for="">Author</label>
-            <input type="radio">
+        <legend>Search By Title Or Author</legend>
+        <form action="/searches/new" method="GET">
+            <input type="text" name="searched">
+            <br>
+            <label class="filter1"><input type="radio" name="searchFilter" value="title">Title</label>
+             <br>         
+            <label class="filter1"><input type="radio" name="searchFilter" value="auther">Author</label>
+            <br>
             <button type="submit">Search the Google Books API</button>
         </form>
 
