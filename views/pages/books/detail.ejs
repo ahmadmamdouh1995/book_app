@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../../layout/head')%>
+
+    <link rel="stylesheet" href="../../../public/styles/reset.css">
+    <link rel="stylesheet" href="../../../public/styles/base.css">
+
+</head>
+
+<body>
+    <%- include('../../layout/header')%>
+
+    <main>
+        <section>
+            <img src="<%=book.image_url%>">
+            <h2><%=book.title%></h2>
+            <h3><%=book.author%></h3>
+            <p><%=book.description%></p>
+            <p><%=book.isbn%></p>
+            <p><%=book.bookshelf%></p>
+
+            <form action="/books/<%=book.id%>?_method=PUT" method="post">
+                <input type="hidden" name="bookImage" value="<%=book.image_url%>">
+                <input type="text" name="bookTitle" value="<%=book.title%>">
+                <br>
+                <input type="text" name="bookAuthor" value="<%=book.author%>">
+                <br>
+                <textarea type="text" name="bookDescription" value="<%=book.description%>" rows="6" cols="35" placeholder="<%=book.description%>"></textarea>
+                <br>
+                <input type="text" name="bookISBN" value="<%=book.isbn%>" >
+                <br>
+                <input type="text" name="addBookShelf" placeholder="Add New BookShelfs From Here ..">
+                <br>
+                <button type="submit" >Update Books</button>
+                <br>
+                <select name="bookShelfName" id="bookShelfID">
+                    <option value="default">Default BookShelf Here..</option>
+                </select>
+
+            </form>
+            <button type="submit">Update Details</button>
+
+            <form action="/books/<%=book.id%>?_method=DELETE" method="POST">
+                
+             <button type="submit" >Delete Book</button>   
+            
+            </form>
+        </section>
+    </main>
+
+    <%- include('../../layout/footer')%>
+
+</body>
+
+</html>
