@@ -1,0 +1,15 @@
+<% let action = formAction === "UPDATE" ? `/books/${book.id}?_method=PUT`:
+'/add'; let text = formAction === "UPDATE" ? "Update": "Add" %>
+
+
+<form action="<%=action%>" method="POST">
+    <input type="text" name="bookTitle" value="<%=book.title%>">
+    <br>
+    <input type="text" name="bookAuthor" value="<%=book.author%>">
+    <br>
+    <input type="text" name="bookDescription" value="<%=book.description%>">
+    <br>
+    <input type="text" name="bookISBN" value="<%=book.isbn%>">
+    <br>
+    <button type="submit">Update Book</button>
+</form>

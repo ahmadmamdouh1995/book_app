@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <!-- <link rel="stylesheet" href="/reset.css"  > -->
-    <link href="/base.css" rel="stylesheet" type="text/css"/>
-</head>
-<body>
-    <header>
-        <h1>Home Sweet Home!!</h1>
-        
-
-    </header>
+    <head>
+        <%- include('../layout/head')%>
+    </head>
+    <body>
+        <%- include('../layout/header')%>
 
     <main>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="./searches/new">New</a></li>
-        </ul>
-    </main> 
+        <div>
+            <p><%=books.length%> Saved Books</p>
+        </div>
 
-    <footer>
+        <div>
+            <% books.forEach(item => {%>
+                <section>
+                    <img src="<%=item.image_url%>">
+                    <h2><%=item.title%></h2>
+                    <h3><%=item.author%></h3>
+                    <a class="btn" href="/books/<%=item.id%>">View Details</a>
+                </section>
+            <%})%>
+        </div>
 
-    </footer>
+    </main>
 
+    <%- include('../layout/footer')%>
    
 </body>
 </html>

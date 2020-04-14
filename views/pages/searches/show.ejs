@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show</title>
-    <link rel="stylesheet" href="/base.css" type="text/css">
+    <%- include('../../layout/head')%>
+
+    <link href="../../../public/styles/reset.css" rel="stylesheet" type="text/css" />
+    <link href="../../../public/styles/base.css" rel="stylesheet" type="text/css" />
 
 </head>
+
 <body>
-    <header>
-        <h1>Results:</h1>
-
-    </header>
+    <%- include('../../layout/header')%>
     <main>
-
+        <h1>Results:</h1>
         <div>
-            <% books.forEach(item =>{%>
+            <% book.forEach(item => {%>
             <section>
-                <img src="<%=item.imageThum%>">
-                <h2><%=item.title%></h2>
-                <h3><%=item.author%></h3>
-                <p><%=item.description%></p>
+                <form action="/books" method="POST">
+                    <input type="hidden" name="bookImage" value="<%=item.imageThum%>">
+                    <img src="<%=item.imageThum%>">
+                    <input type="hidden" name="bookTitle" value="<%=item.title%>">
+                    <h2><%=item.title%></h2>
+                    <input type="hidden" name="bookAuthor" value="<%=item.author%>">
+                    <h3><%=item.author%></h3>
+                    <input type="hidden" name="bookDescription" value="<%=item.description%>">
+                    <p><%=item.description%></p>
+                    <input type="hidden" name="bookISBN" value="<%=item.isbn%>">
+                    <p><%=item.isbn%></p>
+                    <button type="submit">Select this Book</button>
+                </form>
             </section>
-            
             <%})%>
-
         </div>
-
-
     </main>
 
-    
+    <%- include('../../layout/footer')%>
 </body>
+
 </html>
