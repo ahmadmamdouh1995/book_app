@@ -15,13 +15,13 @@
     <main>
         <section>
             <img src="<%=book.image_url%>">
-            <h2><%=book.title%></h2>
-            <h3><%=book.author%></h3>
-            <p><%=book.description%></p>
-            <p><%=book.isbn%></p>
-            <p><%=book.bookshelf%></p>
+            <h2>Title : <%=book.title%></h2>
+            <h3>Author : <%=book.author%></h3>
+            <p>Description : <%=book.description%></p>
+            <p>ISBN : <%=book.isbn%></p>
+            <p>BookShelf : <%=book.bookshelf%></p>
 
-            <form action="/books/<%=book.id%>?_method=PUT" method="post">
+            <form action="/books/<%=book.id%>?_method=PUT" method="POST">
                 <input type="hidden" name="bookImage" value="<%=book.image_url%>">
                 <input type="text" name="bookTitle" value="<%=book.title%>">
                 <br>
@@ -37,6 +37,13 @@
                 <br>
                 <select name="bookShelfName" id="bookShelfID">
                     <option value="default">Default BookShelf Here..</option>
+                    <option value="<%=book.bookshelf%>"><%=book.bookshelf%></option>
+
+                    <%#bookshelfProp.forEach((item)=>{%>
+                        <option value=<%#item%></option>
+                       <%#})%>
+
+
                 </select>
 
             </form>
