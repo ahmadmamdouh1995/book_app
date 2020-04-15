@@ -1,5 +1,7 @@
 'use strict';
 
+let bookshelves = [];
+
 require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 const express = require('express');
@@ -23,7 +25,7 @@ app.post('/searches', getSearch);
 app.get('/books/:id', getDetail);
 app.post('/books', SQLshow);
 app.put('/books/:id', updateBooks);
-app.delete('/books/:id',deleteBooks);
+app.delete('/books/:id', deleteBooks);
 app.use('*', notFoundError);
 
 
@@ -85,22 +87,36 @@ function SQLshow(req, res) {
 };
 ///////////////////////////////////////////////////
 
-function updateBooks(req , res){
-    const upSQl = 'UPDATE book SET title=$1, author=$2, image_url=$3, description=$4, isbn=$5 WHERE id=$6 ';
-    const upValue = [req.body.bookTitle, req.body.bookAuthor, req.body.bookImage, req.body.bookDescription, req.body.bookISBN, req.params.id];
-    client.query(upSQl,upValue).then((upResult)=>{
-        res.redirect(`/books/${req.params.id}`)
-    }).catch((error)=> errorHandler(error , req , res));
+function updateBooks(req, res) {
+    if (req.body.addBookShelf) {
+        if (!(bookshelves.includes(req.body.addBookShelf))) {
+            bookshelves.push(req.body.addBookShelf)
+        }
+
+        const upSQl = 'UPDATE book SET title=$1, author=$2, image_url=$3, description=$4, isbn=$5, bookshelf=$6 WHERE id=$7 ';
+        const upValue = [req.body.bookTitle, req.body.bookAuthor, req.body.bookImage, req.body.bookDescription, req.body.bookISBN, req.params.id];
+        client.query(upSQl, upValue).then((upResult) => {
+            res.redirect(`/books/${req.params.id}`)
+        }).catch((error) => errorHandler(error, req, res));
+    } else {
+        const upSQl = 'UPDATE book SET title=$1, author=$2, image_url=$3, description=$4, isbn=$5 WHERE id=$6 ';
+        const upValue = [req.body.bookTitle, req.body.bookAuthor, req.body.bookImage, req.body.bookDescription, req.body.bookISBN, req.params.id];
+        client.query(upSQl, upValue).then((upResult) => {
+            res.redirect(`/books/${req.params.id}`)
+        }).catch((error) => errorHandler(error, req, res));
+
+    }
+
 
 };
 ////////////////////////////////////////////////////
 
-function deleteBooks(req , res){
+function deleteBooks(req, res) {
     const deleteSQL = 'DELETE FROM book WHERE id=$1';
     const deleteVAL = [req.params.id];
-    client.query(deleteSQL , deleteVAL).then((deleteResult)=>{
+    client.query(deleteSQL, deleteVAL).then((deleteResult) => {
         res.redirect('/');
-    }).catch((error)=> errorHandler(error ,req , res));
+    }).catch((error) => errorHandler(error, req, res));
 };
 
 /////////////////////////////////////////////////

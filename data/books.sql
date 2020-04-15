@@ -10,3 +10,8 @@ CREATE TABLE book(
   description TEXT,
   bookshelf VARCHAR(255)
 );
+
+CREATE TABLE bookshelvesTable(
+    id SERIAL PRIMARY KEY,
+    bookshelfName VARCHAR(255)
+)
