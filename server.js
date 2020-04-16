@@ -52,7 +52,7 @@ function getSearch(req, res) {
         let book = bookData.map(item => {
             return new Book(item.volumeInfo);
         })
-        res.render('pages/searches/show', { book: book });
+        res.render('./pages/searches/show', { book: book });
     }).catch((err) => errorHandler(err, req, res))
 };
 //////////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ function SQLshow(req, res) {
             res.render('pages/books/show', { book: searchVal });
         } else {
             const SQL = 'INSERT INTO book (title, author, image_url, description, isbn) VALUES ($1,$2,$3, $4, $5);'
-            const values = [req.body.bookTitle, req.body.bookAuthor, reqbody.bookImage, req.body.bookDescription, req.body.bookISBN];
+            const values = [req.body.bookTitle, req.body.bookAuthor, req.body.bookImage, req.body.bookDescription, req.body.bookISBN];
             client.query(SQL, values).then((addedBook) => {
                 res.render('pages/books/show', { book: values });
             }).catch((err) => {
